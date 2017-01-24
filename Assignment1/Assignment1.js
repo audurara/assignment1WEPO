@@ -36,7 +36,7 @@ $(document).ready(function(){
 
 		vals.startX = e.pageX; 
 		vals.startY = e.pageY;
-
+		
 		vals.isDrawing = true;
 
 	});
@@ -58,9 +58,12 @@ $(document).ready(function(){
 			if (selectedShape === "line") {
 				currentShape = new Line(vals.startX, vals.startY, vals.x2, vals.y2, vals.color);
 				currentShape.draw(context);
+
+
 			} else if (selectedShape === "rectangle") {
 				currentShape = new Rectangle(vals.startX, vals.startY, vals.x2, vals.y2, vals.color);
 				currentShape.draw(context);
+
 			} else if (selectedShape === "pen") {
 				currentShape = new Pen(vals.startX, vals.startY, vals.x2, vals.y2, vals.color);
 				currentShape.draw(context);
@@ -78,14 +81,22 @@ $(document).ready(function(){
 		if(vals.isDrawing === true){
 
 			//context.clearRect(0, 0, 500, 500);
-			context.beginPath();
+			/*context.beginPath();
 			context.moveTo(vals.startX, vals.startY);
 			context.lineTo(vals.x2, vals.y2);
-			context.stroke();
+			context.stroke();*/
 
 			console.log("bæta í arr");
-			arr.push(new Line(vals.startX, vals.startY, vals.x2, vals.y2, vals.color));
-
+			if(selectedShape === "line"){
+				arr.push(new Line(vals.startX, vals.startY, vals.x2, vals.y2, vals.color));
+			}
+			if(selectedShape === "rectangle"){
+				arr.push(new Rectangle(vals.startX, vals.startY, vals.x2, vals.y2, vals.color));
+			}
+			if(selectedShape === "circle"){
+				arr.push(new Circle(vals.startX, vals.startY, vals.x2, vals.y2, vals.color));
+			}
+			
 		}
 		vals.isDrawing = false;
 		console.log(arr);
