@@ -9,6 +9,7 @@ class Line extends Shape {
 		console.log("endX:" + this.endX + "endY:" + this.endY);
 	}
 	draw(){
+
 		var canvas = document.getElementById("myCanvas");
 		var context = canvas.getContext("2d");
 		context.beginPath();

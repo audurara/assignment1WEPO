@@ -1,64 +1,4 @@
 
-/*class Shape {
-	constructor(x, y, color) {
-		this.x = x;
-		this.y = y;
-		this.color = color;
-	}
-	doStuff(){
-
-	}
-}
-
-class Pen extends Shape {
-	constructor(x, y, color) {
-		super(x, y, color);
-	}
-	doStuff() {
-		super.doStuff();
-	}
-}
-
-class Circle extends Shape {
-	constructor(x, y, color) {
-		super(x, y, color);
-	}
-	doStuff() {
-		super.doStuff();
-
-		ctx.beginPath();
-		ctx.arc(100,75,50,0,2*Math.PI);
-		ctx.stroke();
-	}
-}
-
-class Rectangle extends Shape {
-	constructor(x, y, color) {
-		super(x, y, color);
-	}
-	doStuff() {
-		super.doStuff();
-	}
-}
-
-class Line extends Shape {
-	constructor(x, y, color) {
-		super(x, y, color);
-	}
-	doStuff() {
-		super.doStuff();
-	}
-}
-
-class Text extends Shape {
-	constructor(x, y, color) {
-		super(x, y, color);
-	}
-	doStuff() {
-		super.doStuff();
-	}
-}
-*/
 var vals = {
 
 	startX : 0,
@@ -68,6 +8,9 @@ var vals = {
 	isDrawing : false,
 	color: 'blue'
 };
+
+var selectedShape = undefined;
+var currentShape = undefined;
 
 
 var arr = [];
@@ -81,6 +24,11 @@ $(document).ready(function(){
 
 	vals.startX = 0;
 	vals.startY = 0;
+
+	$('input:radio[name=draw]').change(function() {
+		selectedShape = $(this).val();
+		console.log(selectedShape);
+    });
 
 	$("#myCanvas").mousedown(function(e){
 
@@ -101,12 +49,28 @@ $(document).ready(function(){
 			vals.y2 = e.pageY;
 
 			context.clearRect(0, 0, 500, 500);
-			context.beginPath();
-			context.moveTo(vals.startX, vals.startY);
-			context.lineTo(vals.x2, vals.y2);
-			context.stroke();
-		}
 
+			// context.beginPath();
+			// context.moveTo(vals.startX, vals.startY);
+			// context.lineTo(vals.x2, vals.y2);
+			// context.stroke();
+
+			if (selectedShape === "line") {
+				currentShape = new Line(vals.startX, vals.startY, vals.x2, vals.y2, vals.color);
+				currentShape.draw(context);
+			} else if (selectedShape === "rectangle") {
+				currentShape = new Rectangle(vals.startX, vals.startY, vals.x2, vals.y2, vals.color);
+				currentShape.draw(context);
+			} else if (selectedShape === "pen") {
+				currentShape = new Pen(vals.startX, vals.startY, vals.x2, vals.y2, vals.color);
+				currentShape.draw(context);
+			}
+
+			let i;
+			for(i = 0; i < arr.length; i++){
+				arr[i].draw();
+			}
+		}
 	});
 
 	$("#myCanvas").mouseup(function(e){
@@ -121,11 +85,6 @@ $(document).ready(function(){
 
 			console.log("bæta í arr");
 			arr.push(new Line(vals.startX, vals.startY, vals.x2, vals.y2, vals.color));
-			context.clearRect(0, 0, 500, 500);
-			let i;
-			for(i = 0; i < arr.length; i++){
-				arr[i].draw();
-			}
 
 		}
 		vals.isDrawing = false;
