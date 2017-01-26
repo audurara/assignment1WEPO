@@ -1,4 +1,7 @@
 
+var canvasOffset = $("#myCanvas").offset();
+offsetX = canvasOffset.left;
+	offsetY = canvasOffset.top;
 var vals = {
 
 	startX : 0,
@@ -27,12 +30,9 @@ $(document).ready(function(){
 
 	$('input:radio[name=draw]').change(function() {
 		selectedShape = $(this).val();
-		console.log(selectedShape);
     });
 
 	$("#myCanvas").mousedown(function(e){
-
-		console.log("blabla");
 
 		vals.startX = e.pageX; 
 		vals.startY = e.pageY;
@@ -66,6 +66,11 @@ $(document).ready(function(){
 				currentShape.draw(context);
 
 			}
+			else if (selectedShape === "circle") {
+				currentShape = new Circle(vals.startX, vals.startY, vals.x2, vals.y2, vals.color);
+				currentShape.draw(context);
+
+			}
 
 			let i;
 			for(i = 0; i < arr.length; i++){
@@ -78,13 +83,6 @@ $(document).ready(function(){
 
 		if(vals.isDrawing === true){
 
-			//context.clearRect(0, 0, 500, 500);
-			/*context.beginPath();
-			context.moveTo(vals.startX, vals.startY);
-			context.lineTo(vals.x2, vals.y2);
-			context.stroke();*/
-
-			console.log("bæta í arr");
 			if(selectedShape === "line"){
 				arr.push(new Line(vals.startX, vals.startY, vals.x2, vals.y2, vals.color));
 			}
@@ -94,11 +92,12 @@ $(document).ready(function(){
 			if(selectedShape === "circle"){
 				arr.push(new Circle(vals.startX, vals.startY, vals.x2, vals.y2, vals.color));
 			}
-
+			if(selectedShape === "pen"){
+				arr.push(new Pen(vals.startX, vals.startY, vals.x2, vals.y2, vals.color));
+			}
 
 			vals.isDrawing = false;
 		}
-		//vals.isDrawing = false;
 		console.log(arr);
 
 
