@@ -48,12 +48,9 @@ $(document).ready(function(){
 			vals.x2 = e.pageX;
 			vals.y2 = e.pageY;
 
+
 			context.clearRect(0, 0, 500, 500);
 
-			// context.beginPath();
-			// context.moveTo(vals.startX, vals.startY);
-			// context.lineTo(vals.x2, vals.y2);
-			// context.stroke();
 
 			if (selectedShape === "line") {
 				currentShape = new Line(vals.startX, vals.startY, vals.x2, vals.y2, vals.color);
@@ -67,6 +64,7 @@ $(document).ready(function(){
 			} else if (selectedShape === "pen") {
 				currentShape = new Pen(vals.startX, vals.startY, vals.x2, vals.y2, vals.color);
 				currentShape.draw(context);
+
 			}
 
 			let i;
@@ -96,9 +94,11 @@ $(document).ready(function(){
 			if(selectedShape === "circle"){
 				arr.push(new Circle(vals.startX, vals.startY, vals.x2, vals.y2, vals.color));
 			}
-			
+
+
+			vals.isDrawing = false;
 		}
-		vals.isDrawing = false;
+		//vals.isDrawing = false;
 		console.log(arr);
 
 
