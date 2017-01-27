@@ -12,10 +12,10 @@ var vals = {
 	y2: 0,
 	isDrawing : false,
 	color: 'black',
-	pWidth: 0,
+	pWidth: 0
 };
 
-var selectedShape = undefined;
+var selectedShape = "pen";
 var currentShape = undefined;
 
 
@@ -48,18 +48,10 @@ $(document).ready(function(){
 			context.moveTo(e.clientX, e.clientY);
 		}
 		if(selectedShape === "text"){
-
-			color = $('#color').val();
-		
-			console.log(color);
 			canMouseX = parseInt(e.clientX - offsetX);
             canMouseY = parseInt(e.clientY - offsetY);
-            $("#downlog").html("Down: " + canMouseX + " / " + canMouseY);
-
-            var text = document.getElementById("text").value;
-            context.font = 'italic 20px sans-serif';
-            context.fillStyle = color;
-            context.fillText(text, canMouseX, canMouseY);
+			currentShape = new Text(vals.startX, vals.startY, vals.x2, vals.y2, color);
+			currentShape.draw(context);
 		}
 	
 
@@ -100,21 +92,13 @@ $(document).ready(function(){
     			context.lineTo(e.pageX, e.pageY);
     			context.stroke();
 				
-				console.log("blalbabal");
-				
-
 			}
 			else if (selectedShape === "circle") {
 				color = $('#color').val();
 				pWidth = $('#width').val();
+
 				currentShape = new Circle(vals.startX, vals.startY, vals.x2, vals.y2, color, pWidth);
 				currentShape.draw(context);
-
-			}
-			else if (selectedShape === "text") {
-				currentShape = new Text(vals.startX, vals.startY, vals.x2, vals.y2, color);
-				currentShape.draw(context);
-
 			}
 
 			let i;
