@@ -15,6 +15,8 @@ class Line extends Shape {
 
 		context.strokeStyle = this.color;
 		context.lineWidth = this.pWidth;
+
+
 		context.beginPath();
 		context.moveTo(this.x, this.y);
 		context.lineTo(this.endX, this.endY);
