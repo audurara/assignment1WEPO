@@ -1,6 +1,6 @@
 class Circle extends Shape {
 	constructor(x, y, endX, endY, color, pWidth, radius) {
-		super(x, y, color. pWidth);
+		super(x, y, color, pWidth);
 		this.endX = endX;
 		this.endY = endY;
 		radius = this.radius;

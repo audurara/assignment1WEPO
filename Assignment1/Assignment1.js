@@ -15,7 +15,7 @@ var vals = {
 	pWidth: 0,
 };
 
-var selectedShape = undefined;
+var selectedShape = "pen";
 var currentShape = undefined;
 
 
