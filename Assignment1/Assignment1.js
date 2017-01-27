@@ -11,7 +11,8 @@ var vals = {
 	x2: 0,
 	y2: 0,
 	isDrawing : false,
-	color: 'black'
+	color: 'black',
+	pWidth: 0,
 };
 
 var selectedShape = undefined;
@@ -46,7 +47,20 @@ $(document).ready(function(){
 			context.beginPath();
 			context.moveTo(e.clientX, e.clientY);
 		}
+		if(selectedShape === "text"){
 
+			color = $('#color').val();
+		
+			console.log(color);
+			canMouseX = parseInt(e.clientX - offsetX);
+            canMouseY = parseInt(e.clientY - offsetY);
+            $("#downlog").html("Down: " + canMouseX + " / " + canMouseY);
+
+            var text = document.getElementById("text").value;
+            context.font = 'italic 20px sans-serif';
+            context.fillStyle = color;
+            context.fillText(text, canMouseX, canMouseY);
+		}
 	
 
 	});
@@ -62,27 +76,25 @@ $(document).ready(function(){
 			context.clearRect(0, 0, 500, 500);
 
 
-
-			//context.lineWidth = 10;
-			//context.lineJoin = context.lineCap = 'round';
-
-
-
-
 			if (selectedShape === "line") {
 				color = $('#color').val();
-				currentShape = new Line(vals.startX, vals.startY, vals.x2, vals.y2, color);
+				pWidth = $('#width').val();
+				console.log(pWidth);
+
+				currentShape = new Line(vals.startX, vals.startY, vals.x2, vals.y2, color, pWidth);
 				currentShape.draw(context);
 
 
 			} else if (selectedShape === "rectangle") {
 				color = $('#color').val();
-				currentShape = new Rectangle(vals.startX, vals.startY, vals.x2, vals.y2, color);
+				pWidth = $('#width').val();
+				currentShape = new Rectangle(vals.startX, vals.startY, vals.x2, vals.y2, color, pWidth);
 				currentShape.draw(context);
 
 			} else if (selectedShape === "pen") {
 				color = $('#color').val();
-				currentShape = new Pen(vals.startX, vals.startY, vals.x2, vals.y2, color);
+				pWidth = $('#width').val();
+				currentShape = new Pen(vals.startX, vals.startY, vals.x2, vals.y2, color, pWidth);
 				currentShape.draw(context);
 				
     			context.lineTo(e.pageX, e.pageY);
@@ -94,7 +106,13 @@ $(document).ready(function(){
 			}
 			else if (selectedShape === "circle") {
 				color = $('#color').val();
-				currentShape = new Circle(vals.startX, vals.startY, vals.x2, vals.y2, color);
+				pWidth = $('#width').val();
+				currentShape = new Circle(vals.startX, vals.startY, vals.x2, vals.y2, color, pWidth);
+				currentShape.draw(context);
+
+			}
+			else if (selectedShape === "text") {
+				currentShape = new Text(vals.startX, vals.startY, vals.x2, vals.y2, color);
 				currentShape.draw(context);
 
 			}
@@ -111,17 +129,21 @@ $(document).ready(function(){
 		if(vals.isDrawing === true){
 
 			if(selectedShape === "line"){
-				arr.push(new Line(vals.startX, vals.startY, vals.x2, vals.y2, color));
+				arr.push(new Line(vals.startX, vals.startY, vals.x2, vals.y2, color, pWidth));
 			}
 			if(selectedShape === "rectangle"){
-				arr.push(new Rectangle(vals.startX, vals.startY, vals.x2, vals.y2, color));
+				arr.push(new Rectangle(vals.startX, vals.startY, vals.x2, vals.y2, color, pWidth));
 			}
 			if(selectedShape === "circle"){
-				arr.push(new Circle(vals.startX, vals.startY, vals.x2, vals.y2, color));
+				arr.push(new Circle(vals.startX, vals.startY, vals.x2, vals.y2, color, pWidth));
 			}
 			if(selectedShape === "pen"){
-				arr.push(new Pen(vals.startX, vals.startY, vals.x2, vals.y2, color));
+				arr.push(new Pen(vals.startX, vals.startY, vals.x2, vals.y2, color, pWidth));
 			}
+			if(selectedShape === "text"){
+				arr.push(new Text(vals.startX, vals.startY, vals.x2, vals.y2, color));
+			}
+
 
 			vals.isDrawing = false;
 		}

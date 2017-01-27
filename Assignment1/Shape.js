@@ -1,8 +1,9 @@
 class Shape {
-	constructor(x, y, color) {
+	constructor(x, y, color, pWidth) {
 		this.x = x;
 		this.y = y;
 		this.color = color;
+		this.pWidth = pWidth;
 
 	}
 	printValues(){
