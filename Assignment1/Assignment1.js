@@ -1,7 +1,9 @@
 
 var canvasOffset = $("#myCanvas").offset();
 offsetX = canvasOffset.left;
-	offsetY = canvasOffset.top;
+offsetY = canvasOffset.top;
+
+
 var vals = {
 
 	startX : 0,
@@ -39,6 +41,14 @@ $(document).ready(function(){
 		
 		vals.isDrawing = true;
 
+		if(selectedShape === "pen") {
+			console.log("hallo");
+			context.beginPath();
+			context.moveTo(e.clientX, e.clientY);
+		}
+
+	
+
 	});
 
 	$("#myCanvas").mousemove(function(e){
@@ -52,6 +62,15 @@ $(document).ready(function(){
 			context.clearRect(0, 0, 500, 500);
 
 
+
+			//context.lineWidth = 10;
+			//context.lineJoin = context.lineCap = 'round';
+
+	
+
+
+
+
 			if (selectedShape === "line") {
 				currentShape = new Line(vals.startX, vals.startY, vals.x2, vals.y2, vals.color);
 				currentShape.draw(context);
@@ -63,7 +82,14 @@ $(document).ready(function(){
 
 			} else if (selectedShape === "pen") {
 				currentShape = new Pen(vals.startX, vals.startY, vals.x2, vals.y2, vals.color);
-				currentShape.draw(context);
+
+				//context.lineTo(e.clientX, e.clientY);
+    			//context.stroke();
+
+    			context.lineTo(e.pageX, e.pageY);
+    			context.stroke();
+				//currentShape.draw(context);
+				console.log("blalbabal");
 
 			}
 			else if (selectedShape === "circle") {

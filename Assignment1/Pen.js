@@ -8,14 +8,11 @@ class Pen extends Shape {
 		super.printValues();
 		console.log("endX:" + this.endX + "endY:" + this.endY);
 	}
-	draw(context){
-		//context.beginPath();
-		//context.moveTo(0, 0);
-		//context.lineTo(500, 500);
-		//context.stroke();
+	draw(){
 		var canvas = document.getElementById("myCanvas");
 		var context = canvas.getContext("2d");
 
-	}
+    }
+
 
 }
