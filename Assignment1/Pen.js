@@ -12,6 +12,8 @@ class Pen extends Shape {
 		var canvas = document.getElementById("myCanvas");
 		var context = canvas.getContext("2d");
 
+		context.strokeStyle = this.color;
+
     }
 
 

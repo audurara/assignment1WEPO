@@ -11,7 +11,7 @@ var vals = {
 	x2: 0,
 	y2: 0,
 	isDrawing : false,
-	color: 'blue'
+	color: 'black'
 };
 
 var selectedShape = undefined;
@@ -66,34 +66,35 @@ $(document).ready(function(){
 			//context.lineWidth = 10;
 			//context.lineJoin = context.lineCap = 'round';
 
-	
-
 
 
 
 			if (selectedShape === "line") {
-				currentShape = new Line(vals.startX, vals.startY, vals.x2, vals.y2, vals.color);
+				color = $('#color').val();
+				currentShape = new Line(vals.startX, vals.startY, vals.x2, vals.y2, color);
 				currentShape.draw(context);
 
 
 			} else if (selectedShape === "rectangle") {
-				currentShape = new Rectangle(vals.startX, vals.startY, vals.x2, vals.y2, vals.color);
+				color = $('#color').val();
+				currentShape = new Rectangle(vals.startX, vals.startY, vals.x2, vals.y2, color);
 				currentShape.draw(context);
 
 			} else if (selectedShape === "pen") {
-				currentShape = new Pen(vals.startX, vals.startY, vals.x2, vals.y2, vals.color);
-
-				//context.lineTo(e.clientX, e.clientY);
-    			//context.stroke();
-
+				color = $('#color').val();
+				currentShape = new Pen(vals.startX, vals.startY, vals.x2, vals.y2, color);
+				currentShape.draw(context);
+				
     			context.lineTo(e.pageX, e.pageY);
     			context.stroke();
-				//currentShape.draw(context);
+				
 				console.log("blalbabal");
+				
 
 			}
 			else if (selectedShape === "circle") {
-				currentShape = new Circle(vals.startX, vals.startY, vals.x2, vals.y2, vals.color);
+				color = $('#color').val();
+				currentShape = new Circle(vals.startX, vals.startY, vals.x2, vals.y2, color);
 				currentShape.draw(context);
 
 			}
@@ -110,16 +111,16 @@ $(document).ready(function(){
 		if(vals.isDrawing === true){
 
 			if(selectedShape === "line"){
-				arr.push(new Line(vals.startX, vals.startY, vals.x2, vals.y2, vals.color));
+				arr.push(new Line(vals.startX, vals.startY, vals.x2, vals.y2, color));
 			}
 			if(selectedShape === "rectangle"){
-				arr.push(new Rectangle(vals.startX, vals.startY, vals.x2, vals.y2, vals.color));
+				arr.push(new Rectangle(vals.startX, vals.startY, vals.x2, vals.y2, color));
 			}
 			if(selectedShape === "circle"){
-				arr.push(new Circle(vals.startX, vals.startY, vals.x2, vals.y2, vals.color));
+				arr.push(new Circle(vals.startX, vals.startY, vals.x2, vals.y2, color));
 			}
 			if(selectedShape === "pen"){
-				arr.push(new Pen(vals.startX, vals.startY, vals.x2, vals.y2, vals.color));
+				arr.push(new Pen(vals.startX, vals.startY, vals.x2, vals.y2, color));
 			}
 
 			vals.isDrawing = false;

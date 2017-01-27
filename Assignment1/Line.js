@@ -12,6 +12,8 @@ class Line extends Shape {
 
 		var canvas = document.getElementById("myCanvas");
 		var context = canvas.getContext("2d");
+
+		context.strokeStyle = this.color;
 		context.beginPath();
 		context.moveTo(this.x, this.y);
 		context.lineTo(this.endX, this.endY);
