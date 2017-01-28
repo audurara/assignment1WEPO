@@ -1,9 +1,8 @@
 class Text extends Shape {
-	constructor(x, y, color, pWidth, font, fSize, text) {
-		super(x, y, color);
-		this.color = color;
+	constructor(x, y, endX, endY, color, pWidth, font, fSize, text) {
+		super(x, y, color, pWidth);
+		this.font = font;
 		this.fSize = fSize;
-		this.pWidth = pWidth;
 		this.text = text;
 	}
 	printValues(){
@@ -13,15 +12,16 @@ class Text extends Shape {
 	draw() {
 		var canvas = document.getElementById("myCanvas");
 		var context = canvas.getContext("2d");
-		
-		var color = $('#color').val();
+	
 
 		console.log(color);
-        $("#downlog").html("Down: " + canMouseX + " / " + canMouseY);
+		console.log(font);
+		console.log(fSize);
 
         var text = document.getElementById("text").value;
-        context.font = 'italic 20px sans-serif';
+        context.font = fSize + "px " + font;
         context.fillStyle = color;
-        context.fillText(text, canMouseX, canMouseY);
+        context.fillText(text, this.x, this.y);
+
 	}
 }

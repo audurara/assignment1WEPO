@@ -13,7 +13,8 @@ var vals = {
 	isDrawing : false,
 	isMoving : false,
 	color: 'black',
-	pWidth: 0
+	pWidth: 0,
+	fSize : 0
 };
 
 var selectedShape = "pen";
@@ -21,7 +22,9 @@ var currentShape = undefined;
 var currentO = undefined;
 
 
+
 var arr = [];
+var undoArr = [];
 $(document).ready(function(){
 
 	let item = new Shape(10, 20, "black");
@@ -55,8 +58,13 @@ $(document).ready(function(){
 		if(selectedShape === "text"){
 			canMouseX = parseInt(e.clientX - offsetX);
             canMouseY = parseInt(e.clientY - offsetY);
-			currentShape = new Text(vals.startX, vals.startY, vals.x2, vals.y2, color);
+            color = $('#color').val();
+            font = $('#font').val();
+			fSize = $('#fontSize').val();
+			currentShape = new Text(vals.startX, vals.startY, vals.x2, vals.y2, vals.color, vals.pWidth, "Arial", 30, "");
 			currentShape.draw();
+
+
 		}
 
 		currentO = currentShape;
@@ -78,40 +86,42 @@ $(document).ready(function(){
 			context.clearRect(0, 0, 500, 500);
 
 
-			if (selectedShape === "line") {
-				color = $('#color').val();
-				pWidth = $('#width').val();
 
-				currentShape = new Line(vals.startX, vals.startY, vals.x2, vals.y2, color, pWidth);
-				currentShape.draw(context);
-			} 
-			else if (selectedShape === "rectangle") {
-				color = $('#color').val();
-				pWidth = $('#width').val();
-				currentShape = new Rectangle(vals.startX, vals.startY, vals.x2, vals.y2, color, pWidth);
-				currentShape.draw(context);
+				if (selectedShape === "line") {
+					color = $('#color').val();
+					pWidth = $('#width').val();
 
-			} 
-			else if (selectedShape === "circle") {
-				color = $('#color').val();
-				pWidth = $('#width').val();
-			
 
-				currentShape = new Circle(vals.startX, vals.startY, vals.x2, vals.y2, color, pWidth);
-				currentShape.draw(context);
+					currentShape = new Line(vals.startX, vals.startY, vals.x2, vals.y2, color, pWidth);
+					currentShape.draw(context);
+				} 
+				else if (selectedShape === "rectangle") {
+					color = $('#color').val();
+					pWidth = $('#width').val();
+					currentShape = new Rectangle(vals.startX, vals.startY, vals.x2, vals.y2, color, pWidth);
+					currentShape.draw(context);
+
+				} 
+				else if (selectedShape === "circle") {
+					color = $('#color').val();
+					pWidth = $('#width').val();
 				
-			}
-			else if (selectedShape === "pen") {
-				currentO.setEnd(e.offsetX, e.offsetY);
-				currentShape.draw(context);
-				
-			}
-			else if(selectedShape === "text"){
-				currentO.setEnd(e.offsetX, e.offsetY);
-				color = $('#color').val();
-				currentShape = new Text(vals.startX, vals.startY, vals.x2, vals.y2, color);
-				currentO.draw(context);
-			}
+
+					currentShape = new Circle(vals.startX, vals.startY, vals.x2, vals.y2, color, pWidth);
+					currentShape.draw(context);
+					
+				}
+				else if (selectedShape === "pen") {
+					currentO.setEnd(e.offsetX, e.offsetY);
+					currentShape.draw(context);
+					
+				}
+				else if(selectedShape === "text"){
+		
+					currentO.draw(context);
+
+				}
+		
 
 			let i;
 			for(i = 0; i < arr.length; i++){
@@ -162,8 +172,45 @@ $(document).ready(function(){
 
 
 	});
+
 });
 
+var canvas = document.getElementById("myCanvas");
+var context = canvas.getContext("2d");
+
+
+document.addEventListener('keyup', function(e) {
+	if (e.ctrlKey && e.code === "KeyZ") {
+		undo();
+	}
+}, false);
+
+document.addEventListener('keyup', function(e) {
+	if (e.ctrlKey && e.code === "KeyY") {
+		redo();
+	}
+}, false);
+
+function undo() {
+	if (arr.length !== 0) {
+		undoArr.push(arr.pop());
+		context.clearRect(0, 0, 500, 500);
+		let i;
+		for(i = 0; i < arr.length; i++){
+			arr[i].draw();
+		}
+	}
+}
+function redo() {
+	if (undoArr.length !== 0) {
+		arr.push(undoArr.pop());
+		context.clearRect(0, 0, 500, 500);
+		let i;
+		for(i = 0; i < arr.length; i++){
+			arr[i].draw();
+		}
+	}
+}
 
 
 
