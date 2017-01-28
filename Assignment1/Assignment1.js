@@ -70,8 +70,6 @@ $(document).ready(function(){
 
 			vals.isMoving = true;
 
-			currentO.setEnd(e.offsetX, e.offsetY);
-
 
 			vals.x2 = e.pageX;
 			vals.y2 = e.pageY;
@@ -85,32 +83,40 @@ $(document).ready(function(){
 				pWidth = $('#width').val();
 
 				currentShape = new Line(vals.startX, vals.startY, vals.x2, vals.y2, color, pWidth);
+				currentShape.draw(context);
 			} 
 			else if (selectedShape === "rectangle") {
 				color = $('#color').val();
 				pWidth = $('#width').val();
 				currentShape = new Rectangle(vals.startX, vals.startY, vals.x2, vals.y2, color, pWidth);
+				currentShape.draw(context);
 
 			} 
 			else if (selectedShape === "circle") {
 				color = $('#color').val();
 				pWidth = $('#width').val();
+			
 
 				currentShape = new Circle(vals.startX, vals.startY, vals.x2, vals.y2, color, pWidth);
+				currentShape.draw(context);
+				
+			}
+			else if (selectedShape === "pen") {
+				currentO.setEnd(e.offsetX, e.offsetY);
+				currentShape.draw(context);
 				
 			}
 			else if(selectedShape === "text"){
+				currentO.setEnd(e.offsetX, e.offsetY);
 				color = $('#color').val();
 				currentShape = new Text(vals.startX, vals.startY, vals.x2, vals.y2, color);
-	
+				currentO.draw(context);
 			}
 
 			let i;
 			for(i = 0; i < arr.length; i++){
 				arr[i].draw();
 			}
-
-			currentShape.draw(context);
 
 			
 		}
@@ -121,7 +127,7 @@ $(document).ready(function(){
 		if(vals.isDrawing = true || vals.isMoving === true){
 
 
-			/*if(selectedShape === "line"){
+			if(selectedShape === "line"){
 				arr.push(new Line(vals.startX, vals.startY, vals.x2, vals.y2, color, vals.pWidth));
 				
 			}
@@ -133,14 +139,14 @@ $(document).ready(function(){
 			}
 			if(selectedShape === "pen"){
 				
-				//arr.push(new Pen(vals.startX, vals.startY, vals.x2, vals.y2, color, vals.pWidth));
 				arr.push(currentO);
 				
 			}
 			if(selectedShape === "text"){
-				arr.push(new Text(vals.startX, vals.startY, vals.x2, vals.y2, color));
-			}*/
-			arr.push(currentO);
+				//arr.push(new Text(vals.startX, vals.startY, vals.x2, vals.y2, color));
+				arr.push(currentO);
+			}
+			
 
 			
 			vals.isMoving = false;

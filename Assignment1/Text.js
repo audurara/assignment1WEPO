@@ -13,16 +13,9 @@ class Text extends Shape {
 	draw() {
 		var canvas = document.getElementById("myCanvas");
 		var context = canvas.getContext("2d");
-
-		//var color = $('#color').val();
-
-		//context.font = this.fSize + "px " + this.font;
-		//context.fillStyle = this.color;
-		//context.fillText(this.text, this.x+3, this.y+this.fSize);
-
-
 		
-		
+		var color = $('#color').val();
+
 		console.log(color);
         $("#downlog").html("Down: " + canMouseX + " / " + canMouseY);
 
