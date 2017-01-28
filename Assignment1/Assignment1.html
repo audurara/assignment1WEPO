@@ -7,10 +7,13 @@
 <body>
 	
 	<canvas id="myCanvas" width="500" height="500" style="border:1px solid #000000;"></canvas>
-	<h1> Welcome to Painting World! </h1>
-	<p>Pick a drawing tool!</p>
+	<h1> Welcome to Painting World! <img src="pencil.png"></h1>
+	
 
-	<form action="">
+	<p id= "text1">Pick a drawing tool:</p>
+	
+
+	<form action="" id ="radioB">
 		<input type="radio" name="draw" value="pen"checked> Pen
 		<input type="radio" name="draw" value="circle"> Circle
 		<input type="radio" name="draw" value="rectangle"> Rectangle
@@ -19,8 +22,9 @@
 		<input id="text" type="text" name="text" placeholder="Enter your text here">
 	</form>
 
-	  </select>
-        <p> Color:  <select id="color"> </p>
+	 </select>
+	  	
+       	<p> Color:  <select id="color"> </p> 
             <option value="black" selected="selected">Black</option>
             <option value="grey">Grey</option>
             <option value="mediumpurple">Purple</option>
@@ -29,9 +33,10 @@
             <option value="springgreen">Green</option>
             <option value="tomato">Orange</option>
             <option value="#FFFF66">Yellow</option>
-        </select>
-
-         <p> Line width: <select id="width"> </p>
+     	</select>
+        
+      
+      	 <p> Line width: <select id="width"> </p>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -43,6 +48,8 @@
             <option value="8">9</option>
             <option value="8">10</option>
         </select>
+        
+        
 
         <p> Font: <select id="font"> </p>
             <option value="Arial" selected ="selected">Arial</option>
@@ -55,6 +62,14 @@
             <option value="40">40</option>
             <option value="50">50</option>
         </select>
+
+        <div id ="undoRedoSave">
+			<input id ="undo" type ="submit" name = "undo" value ="undo"></input>
+			<input id ="redo" type ="submit" name = "redo" value ="redo"></input>
+			<input id ="save" type ="submit" name = "save" value ="save"></input>
+		</div>
+
+
 
 
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>

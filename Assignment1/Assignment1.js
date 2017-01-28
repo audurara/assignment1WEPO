@@ -1,7 +1,16 @@
 
+var canvas = document.getElementById("myCanvas");
+var context = canvas.getContext("2d");
+
 var canvasOffset = $("#myCanvas").offset();
-offsetX = canvasOffset.left;
-offsetY = canvasOffset.top;
+
+var selectedShape = "pen";
+var currentShape = undefined;
+var currentO = undefined;
+
+
+var arr = [];
+var undoArr = [];
 
 
 var vals = {
@@ -17,28 +26,23 @@ var vals = {
 	fSize : 0
 };
 
-var selectedShape = "pen";
-var currentShape = undefined;
-var currentO = undefined;
 
-
-
-var arr = [];
-var undoArr = [];
 $(document).ready(function(){
 
 	let item = new Shape(10, 20, "black");
 	item.printValues();
 
-	var canvas = document.getElementById("myCanvas");
-	var context = canvas.getContext("2d");
-
 	vals.startX = 0;
 	vals.startY = 0;
+
+	offsetX = canvasOffset.left;
+	offsetY = canvasOffset.top;
+
 
 	$('input:radio[name=draw]').change(function() {
 		selectedShape = $(this).val();
     });
+
 
 	$("#myCanvas").mousedown(function(e){
 
@@ -47,8 +51,6 @@ $(document).ready(function(){
 		
 		vals.isDrawing = true;
 
-		
-
 		if(selectedShape === "pen") {
 			color = $('#color').val();
 			pWidth = $('#width').val();
@@ -56,21 +58,26 @@ $(document).ready(function(){
 			
 		}
 		if(selectedShape === "text"){
-			canMouseX = parseInt(e.clientX - offsetX);
-            canMouseY = parseInt(e.clientY - offsetY);
+			vals.isDrawing = false;
+	
             color = $('#color').val();
             font = $('#font').val();
 			fSize = $('#fontSize').val();
-			currentShape = new Text(vals.startX, vals.startY, vals.x2, vals.y2, vals.color, vals.pWidth, "Arial", 30, "");
-			currentShape.draw();
-
+			newText = new Text(vals.startX, vals.startY, vals.x2, vals.y2, vals.color, vals.pWidth, "Arial", 30, "");
+			arr.push(newText);
+			newText.draw();
+			//vals.isDrawing = false;
+			vals.isMoving = false;
+			vals.color = undefined;
+			pWidth = undefined;
+			fSize = undefined;
+			//vals.font = undefined;
 
 		}
 
 		currentO = currentShape;
-	
-
 	});
+
 
 	$("#myCanvas").mousemove(function(e){
 
@@ -116,11 +123,11 @@ $(document).ready(function(){
 					currentShape.draw(context);
 					
 				}
-				else if(selectedShape === "text"){
+				/*else if(selectedShape === "text"){
 		
 					currentO.draw(context);
 
-				}
+				}*/
 		
 
 			let i;
@@ -131,6 +138,7 @@ $(document).ready(function(){
 			
 		}
 	});
+
 
 	$("#myCanvas").mouseup(function(e){
 
@@ -152,10 +160,10 @@ $(document).ready(function(){
 				arr.push(currentO);
 				
 			}
-			if(selectedShape === "text"){
+			/*if(selectedShape === "text"){
 				//arr.push(new Text(vals.startX, vals.startY, vals.x2, vals.y2, color));
 				arr.push(currentO);
-			}
+			}*/
 			
 
 			
@@ -169,27 +177,19 @@ $(document).ready(function(){
 			
 		}
 		console.log(arr);
-
-
 	});
-
 });
 
-var canvas = document.getElementById("myCanvas");
-var context = canvas.getContext("2d");
 
+document.getElementById('undo').onclick = function(){
+	
+	undo();
+}
 
-document.addEventListener('keyup', function(e) {
-	if (e.ctrlKey && e.code === "KeyZ") {
-		undo();
-	}
-}, false);
-
-document.addEventListener('keyup', function(e) {
-	if (e.ctrlKey && e.code === "KeyY") {
-		redo();
-	}
-}, false);
+document.getElementById('redo').onclick = function(){
+	
+	redo();
+}
 
 function undo() {
 	if (arr.length !== 0) {
