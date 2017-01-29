@@ -5,7 +5,7 @@ class Pen extends Shape {
 		this.endY = endY;
 		this.array = [];
 	}
-	
+
 	setEnd(x, y){
 		this.array.push({x: x, y: y});
 	}
@@ -17,7 +17,7 @@ class Pen extends Shape {
 		context.beginPath();
 		context.lineWidth = this.pWidth;
 		context.strokeStyle = this.color;
-		context.moveTo(this.x, this.y);
+		context.moveTo(this.x-10, this.y-10);
 		for (var i = 0; i < this.array.length; i++){
 			context.lineTo(this.array[i].x, this.array[i].y);
 			context.stroke()
