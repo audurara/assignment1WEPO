@@ -4,10 +4,7 @@ class Line extends Shape {
 		this.endX = endX;
 		this.endY = endY;
 	}
-	printValues(){
-		super.printValues();
-		console.log("endX:" + this.endX + "endY:" + this.endY);
-	}
+
 	draw(){
 
 		var canvas = document.getElementById("myCanvas");
@@ -15,8 +12,6 @@ class Line extends Shape {
 
 		context.strokeStyle = this.color;
 		context.lineWidth = this.pWidth;
-
-
 		context.beginPath();
 		context.moveTo(this.x, this.y);
 		context.lineTo(this.endX, this.endY);

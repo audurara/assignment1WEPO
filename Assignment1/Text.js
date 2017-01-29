@@ -5,18 +5,12 @@ class Text extends Shape {
 		this.fSize = fSize;
 		this.text = text;
 	}
-	printValues(){
-		super.printValues();
-		console.log("endX:" + this.endX + "endY:" + this.endY);
-	}
+
 	draw() {
 		var canvas = document.getElementById("myCanvas");
 		var context = canvas.getContext("2d");
 	
-
-		console.log("Inni i text draw");
-		//console.log(text);
-        context.font = fSize + "px " + font;
+        context.font = this.fSize + "px " + this.font;
         context.fillStyle = this.color;
         context.fillText(this.text, this.x, this.y);
         context.closePath();

@@ -5,16 +5,11 @@ class Circle extends Shape {
 		this.endY = endY;
 		radius = this.radius;
 	}
-	printValues(){
-		super.printValues();
-		console.log("endX:" + this.endX + "endY:" + this.endY + "radius" + this.radius);
-	}
+	
 	draw(){
 
 		var canvas = document.getElementById("myCanvas");
 		var context = canvas.getContext("2d");
-		
-
 		var centerX = canvas.width / 2;
       	var centerY = canvas.height / 2;
 
@@ -26,7 +21,6 @@ class Circle extends Shape {
 	    context.bezierCurveTo(this.endX, this.endY, this.x, this.endY, this.x, this.y + (this.endY - this.y) / 2);
 	    context.closePath();
 	    context.stroke();
-
 
 	}
 }

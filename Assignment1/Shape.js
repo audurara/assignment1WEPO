@@ -10,8 +10,4 @@ class Shape {
 		this.endX = x;
 		this.endY = y;
 	}
-	printValues(){
-		console.log("x:" + this.x + "y:" + this.y + "color:" + this.color);
-
-	}
 }

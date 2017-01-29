@@ -5,17 +5,14 @@ class Pen extends Shape {
 		this.endY = endY;
 		this.array = [];
 	}
-	printValues(){
-		super.printValues();
-		console.log("endX:" + this.endX + "endY:" + this.endY);
-	}
+	
 	setEnd(x, y){
 		this.array.push({x: x, y: y});
 	}
 	draw(){
+
 		var canvas = document.getElementById("myCanvas");
 		var context = canvas.getContext("2d");
-
 
 		context.beginPath();
 		context.lineWidth = this.pWidth;
