@@ -12,12 +12,11 @@ class Rectangle extends Shape {
 
 		context.strokeStyle = this.color;
 		context.lineWidth = this.pWidth;
-
-
-		var x = Math.min(this.x, this.endX), 
-			y = Math.min(this.y, this.endY), 
-			w = Math.abs(this.x - this.endX),
-			h = Math.abs(this.y - this.endY);
+		
+		var x = Math.min(this.x, this.endX); 
+		var y = Math.min(this.y, this.endY);
+		var w = Math.abs(this.x - this.endX);
+		var h = Math.abs(this.y - this.endY);
 
 		context.strokeRect(x, y, w, h);
 	}
