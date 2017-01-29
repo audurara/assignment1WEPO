@@ -115,14 +115,14 @@ $(document).ready(function(){
 		if(vals.isDrawing = true || vals.isMoving === true){
 
 			if(selectedShape === "line"){
-				arr.push(new Line(vals.startX, vals.startY, vals.x2, vals.y2, color, vals.pWidth));
+				arr.push(new Line(vals.startX, vals.startY, vals.x2, vals.y2, color, pWidth));
 				
 			}
 			if(selectedShape === "rectangle"){
-				arr.push(new Rectangle(vals.startX, vals.startY, vals.x2, vals.y2, color, vals.pWidth));
+				arr.push(new Rectangle(vals.startX, vals.startY, vals.x2, vals.y2, color, pWidth));
 			}
 			if(selectedShape === "circle"){
-				arr.push(new Circle(vals.startX, vals.startY, vals.x2, vals.y2, color, vals.pWidth));
+				arr.push(new Circle(vals.startX, vals.startY, vals.x2, vals.y2, color, pWidth));
 			}
 			if(selectedShape === "pen"){
 				arr.push(currentO);	
