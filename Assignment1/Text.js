@@ -14,14 +14,12 @@ class Text extends Shape {
 		var context = canvas.getContext("2d");
 	
 
-		console.log(color);
-		console.log(font);
-		console.log(fSize);
-
-        var text = document.getElementById("text").value;
+		console.log("Inni i text draw");
+		//console.log(text);
         context.font = fSize + "px " + font;
-        context.fillStyle = color;
-        context.fillText(text, this.x, this.y);
+        context.fillStyle = this.color;
+        context.fillText(this.text, this.x, this.y);
+        context.closePath();
 
 	}
 }

@@ -57,21 +57,24 @@ $(document).ready(function(){
 			currentShape = new Pen(vals.startX, vals.startY, vals.x2, vals.y2, color, pWidth);
 			
 		}
-		if(selectedShape === "text"){
+		if(selectedShape === "text" && selectedShape !== "circle"){
 			vals.isDrawing = false;
-	
+			console.log("Inni i mousedown");
+			var text = document.getElementById("text").value;
+			console.log(text);
             color = $('#color').val();
             font = $('#font').val();
 			fSize = $('#fontSize').val();
-			newText = new Text(vals.startX, vals.startY, vals.x2, vals.y2, vals.color, vals.pWidth, "Arial", 30, "");
+			newText = new Text(vals.startX, vals.startY, vals.x2, vals.y2, color, vals.pWidth, "Arial", 30, text);
 			arr.push(newText);
 			newText.draw();
-			//vals.isDrawing = false;
+			vals.isDrawing = false;
 			vals.isMoving = false;
 			vals.color = undefined;
 			pWidth = undefined;
 			fSize = undefined;
 			//vals.font = undefined;
+	
 
 		}
 
@@ -113,9 +116,10 @@ $(document).ready(function(){
 					color = $('#color').val();
 					pWidth = $('#width').val();
 				
-
+					console.log("Inni i mousemove Circle");
 					currentShape = new Circle(vals.startX, vals.startY, vals.x2, vals.y2, color, pWidth);
 					currentShape.draw(context);
+					
 					
 				}
 				else if (selectedShape === "pen") {
@@ -129,14 +133,15 @@ $(document).ready(function(){
 
 				}*/
 		
-
-			let i;
-			for(i = 0; i < arr.length; i++){
-				arr[i].draw();
-			}
-
+			
+					let i;
+					for(i = 0; i < arr.length; i++){
+						arr[i].draw(context);
+						console.log("buinn i text draw");
+					}
 			
 		}
+			
 	});
 
 
