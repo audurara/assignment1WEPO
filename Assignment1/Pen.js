@@ -9,8 +9,8 @@ class Pen extends Shape {
 	setEnd(x, y){
 		this.array.push({x: x, y: y});
 	}
-	draw(){
 
+	draw(){
 		var canvas = document.getElementById("myCanvas");
 		var context = canvas.getContext("2d");
 

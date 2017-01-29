@@ -4,8 +4,8 @@ class Shape {
 		this.y = y;
 		this.color = color;
 		this.pWidth = pWidth;
-
 	}
+
 	setEnd(x, y){
 		this.endX = x;
 		this.endY = y;

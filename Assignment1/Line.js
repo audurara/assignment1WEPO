@@ -16,6 +16,5 @@ class Line extends Shape {
 		context.moveTo(this.x, this.y);
 		context.lineTo(this.endX, this.endY);
 		context.stroke();
-
 	}
 }

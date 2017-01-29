@@ -4,10 +4,7 @@ class Rectangle extends Shape {
 		this.endX = endX;
 		this.endY = endY;
 	}
-	printValues(){
-		super.printValues();
-		console.log("endX:" + this.endX + "endY:" + this.endY);
-	}
+
 	draw(){
 
 		var canvas = document.getElementById("myCanvas");
@@ -23,6 +20,5 @@ class Rectangle extends Shape {
 			h = Math.abs(this.y - this.endY);
 
 		context.strokeRect(x, y, w, h);
-
 	}
 }

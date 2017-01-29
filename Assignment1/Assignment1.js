@@ -46,20 +46,18 @@ $(document).ready(function(){
 			
 		}
 		if(selectedShape === "text"){
-			vals.isDrawing = false;
 			var text = document.getElementById("text").value;
+
             color = $('#color').val();
             font = $('#font').val();
 			fSize = $('#fontSize').val();
+			
 			newText = new Text(vals.startX, vals.startY, vals.x2, vals.y2, color, vals.pWidth, font, fSize, text);
 			arr.push(newText);
 			newText.draw();
+
 			vals.isDrawing = false;
 			vals.isMoving = false;
-			vals.color = undefined;
-			pWidth = undefined;
-			fSize = undefined;
-	
 		}
 
 		currentO = currentShape;

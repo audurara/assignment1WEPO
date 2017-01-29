@@ -21,6 +21,5 @@ class Circle extends Shape {
 	    context.bezierCurveTo(this.endX, this.endY, this.x, this.endY, this.x, this.y + (this.endY - this.y) / 2);
 	    context.closePath();
 	    context.stroke();
-
 	}
 }
